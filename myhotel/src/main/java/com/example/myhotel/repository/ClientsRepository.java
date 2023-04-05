@@ -26,8 +26,8 @@ public interface ClientsRepository extends CrudRepository<Clients, Long> {
 
     @Query(value = Queries.findAllClientsBySSN, nativeQuery = true)
     List<Clients> findBySSN(@Param("SSN") int SSN);
-    @Query(value =" SELECT * FROM clients WHERE hotel_ID = :hotel_ID;", nativeQuery = true)
-    List<Clients> findByHotelID(@Param("hotel_ID") long ID);
+    @Query(value =" SELECT * FROM clients WHERE id_hotel = :id_hotel;", nativeQuery = true)
+    List<Clients> findByHotelID(@Param("id_hotel") long ID);
 
     @Query(value =" SELECT * FROM clients WHERE payment = :payment;", nativeQuery = true)
     List<Clients> findByPaymentStatus(@Param("payment") String payment);

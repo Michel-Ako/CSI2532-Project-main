@@ -33,13 +33,13 @@ public class Queries{
 
     public static final String changePost = "UPDATE db.Employee SET post = :post WHERE ID = :employee_ID";
 
-    public static final String findAllHotelsByID = "SELECT * FROM db.Hotel WHERE ID = :hotel_id ";
+    public static final String findAllHotelsByID = "SELECT * FROM db.Hotel WHERE ID = :id_hotel ";
 
     public static final String findAllHotelsByName = "SELECT * FROM db.Hotel WHERE name = :name ";
 
     public static final String findAllHotelsByRatings = "SELECT * FROM db.Hotel WHERE rating = :rating";
 
-    public static final String changeManager = "UPDATE db.Hotel SET gestionnaire_id = :gestionnaire_id WHERE ID = :hotel_id";
+    public static final String changeManager = "UPDATE db.Hotel SET gestionnaire_id = :gestionnaire_id WHERE ID = :id_hotel";
 
     public static final String findAllRentByID = "SELECT * FROM db.Rent WHERE rent_ID = :rent_ID";
 

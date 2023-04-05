@@ -23,8 +23,8 @@ public interface EmployeeRepository extends CrudRepository<Employee, Long> {
     @Query(value = Queries.findAllEmployeesByName, nativeQuery = true)
     List<Employee> findByName(@Param("name") String name);
 
-    @Query(value = "SELECT * FROM employee WHERE hotel_ID = :hotel_id;", nativeQuery = true)
-    List<Employee> findByHotelID(@Param("hotel_id") long hotelID);
+    @Query(value = "SELECT * FROM employee WHERE id_hotel = :id_hotel;", nativeQuery = true)
+    List<Employee> findByHotelID(@Param("id_hotel") long hotelID);
 
     @Query(value = Queries.findAllEmployeesBySSN, nativeQuery = true)
     Employee findBySSN(@Param("ssn") int SSN);

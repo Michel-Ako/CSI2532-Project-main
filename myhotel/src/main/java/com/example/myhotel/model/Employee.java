@@ -26,7 +26,7 @@ public class Employee {
     private String post;
 
     @ManyToOne
-    @JoinColumn(name = "hotel_id", referencedColumnName = "hotel_id")
+    @JoinColumn(name = "id_hotel", referencedColumnName = "id_hotel")
     @NotBlank(message = "Hotel ID required")
     private Hotel hotel;
 

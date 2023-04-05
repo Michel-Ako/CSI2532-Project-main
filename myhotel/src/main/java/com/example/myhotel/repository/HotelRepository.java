@@ -16,7 +16,7 @@ public interface HotelRepository extends CrudRepository<Hotel, Long> {
 
     @Override
     @Query(value = Queries.findAllHotelsByID, nativeQuery = true)
-    Optional<Hotel> findById(@Param("hotel_id") Long ID);
+    Optional<Hotel> findById(@Param("id_hotel") Long ID);
 
 
     @Query(value = Queries.findAllHotelsByName, nativeQuery = true)
@@ -31,7 +31,7 @@ public interface HotelRepository extends CrudRepository<Hotel, Long> {
 
     @Modifying
     @Query(value = Queries.changeManager, nativeQuery = true)
-    void changeManager(@Param("hotel_id") Long ID, @Param("gestionnaire_id") String gestionnaire_id);
+    void changeManager(@Param("id_hotel") Long ID, @Param("gestionnaire_id") String gestionnaire_id);
 
     @Query("SELECT h FROM Hotel h WHERE h.name = :name OR h.chain = :chain_name OR h.rating = :rating")
     List<Hotel> findByNameOrChainOrRating(@Param("name") String name, @Param("chain_name") String chain, @Param("rating") Integer rating);

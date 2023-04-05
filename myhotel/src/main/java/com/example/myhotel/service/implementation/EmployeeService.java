@@ -34,7 +34,7 @@ public class EmployeeService implements IEmployeeService {
         return employeeRepository.findBySSN(SSN);
     }
     @Override
-    public List<Employee> findByHotelID(@Param("Hotel_ID") long hotelID){
+    public List<Employee> findByHotelID(@Param("id_hotel") long hotelID){
         return employeeRepository.findByHotelID(hotelID);
     }
 

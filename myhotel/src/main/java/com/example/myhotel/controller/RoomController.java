@@ -32,6 +32,9 @@ public class RoomController {
     private IRentService rentService;
 
     // Find available rooms for a given date range and room type
+
+    // Get all rooms
+
     @GetMapping("/available")
     public ResponseEntity<List<Room>> findAvailableRooms(@RequestParam LocalDate startDate, @RequestParam LocalDate endDate,
                                                          @RequestParam String roomType) {

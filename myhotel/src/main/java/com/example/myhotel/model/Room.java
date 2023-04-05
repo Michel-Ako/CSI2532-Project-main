@@ -45,7 +45,7 @@ public class Room {
     private String status;
 
     @ManyToOne(targetEntity = Hotel.class)
-    @JoinColumn(name = "hotel_ID", referencedColumnName = "hotel_ID")
+    @JoinColumn(name = "id_hotel", referencedColumnName = "id_hotel")
     @NotBlank(message = "Hotel ID required")
     private Hotel hotelID;
 
