@@ -2,9 +2,7 @@ package com.example.myhotel.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Archive", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"archives_ID"})
-})
+@Table(name = "archive")
 public class Archives {
 
     @Id

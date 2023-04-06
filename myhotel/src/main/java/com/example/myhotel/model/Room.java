@@ -11,8 +11,21 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "Room")
+@Table(name = "chambre")
 public class Room {
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Clients client;
+
+    @ManyToOne
+    @JoinColumn(name = "id_employe")
+    private Employee employe;
+
+    @ManyToOne
+    @JoinColumn(name = "id_hotel")
+    private Hotel hotel;
+
     @Id
     @Column(name = "roomNumber", nullable = false)
     private int roomNumber;
@@ -44,26 +57,10 @@ public class Room {
     @Column(name = "status", nullable = false)
     private String status;
 
-    @ManyToOne(targetEntity = Hotel.class)
-    @JoinColumn(name = "id_hotel", referencedColumnName = "id_hotel")
-    @NotBlank(message = "Hotel ID required")
-    private Hotel hotelID;
-
-    @ManyToOne(targetEntity = Clients.class)
-    @JoinColumn(name = "client_ID", referencedColumnName = "client_ID")
-    @NotBlank(message = "Client ID required")
-    private Clients clientID;
-
-    @ManyToOne(targetEntity = Employee.class)
-    @JoinColumn(name = "employee_ID", referencedColumnName = "employee_ID")
-    @NotBlank(message = "Employee ID required")
-    private Employee employeeID;
-
-
     public Room() {
     }
 
-    public Room(int roomNumber, String roomType, double price, String capacity, String view, boolean extent, String damage, String amenities, boolean availability, String status, Hotel hotelID, Clients clientID, Employee employeeID) {
+    public Room(int roomNumber, String roomType, double price, String capacity, String view, boolean extent, String damage, String amenities, boolean availability, String status, Hotel hotel, Clients client, Employee employe) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.price = price;
@@ -74,9 +71,9 @@ public class Room {
         this.amenities = amenities;
         this.availability = availability;
         this.status = status;
-        this.hotelID = hotelID;
-        this.clientID = clientID;
-        this.employeeID = employeeID;
+        this.hotel = hotel;
+        this.client = client;
+        this.employe = employe;
     }
 
     public int getRoomNumber() {
@@ -85,14 +82,6 @@ public class Room {
 
     public void setRoomNumber(int roomNumber) {
         this.roomNumber = roomNumber;
-    }
-
-    public boolean isAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
     }
 
     public String getRoomType() {
@@ -127,12 +116,20 @@ public class Room {
         this.view = view;
     }
 
-    public boolean getExtent() {
+    public boolean isExtent() {
         return extent;
     }
 
     public void setExtent(boolean extent) {
         this.extent = extent;
+    }
+
+    public String getDamage() {
+        return damage;
+    }
+
+    public void setDamage(String damage) {
+        this.damage = damage;
     }
 
     public String getAmenities() {
@@ -143,8 +140,12 @@ public class Room {
         this.amenities = amenities;
     }
 
-    public String getDamage() {
-        return damage;
+    public boolean isAvailability() {
+        return availability;
+    }
+
+    public void setAvailability(boolean availability) {
+        this.availability = availability;
     }
 
     public String getStatus() {
@@ -154,35 +155,30 @@ public class Room {
     public void setStatus(String status) {
         this.status = status;
     }
-
     public Clients getClientID() {
-        return clientID;
+        return client;
     }
 
-    public void setClientID(Clients clientID) {
-        this.clientID = clientID;
+    public void setClient(Clients client) {
+        this.client = client;
     }
 
-    public void setDamage(String damage) {
-        this.damage = damage;
+    public Employee getEmploye() {
+        return employe;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
-        return "Room{" +
-                "roomNumber=" + roomNumber +
-                ", roomType='" + roomType + '\'' +
-                ", price=" + price +
-                ", capacity='" + capacity + '\'' +
-                ", view='" + view + '\'' +
-                ", extent='" + extent + '\'' +
-                ", damage='" + damage + '\'' +
-                ", amenities='" + amenities + '\'' +
-                ", availability=" + availability +
-                ", status='" + status + '\'' +
-                ", hotelID=" + hotelID +
-                ", clientID=" + clientID +
-                ", employeeID=" + employeeID +
-                '}';
+    public void setEmploye(Employee employe) {
+        this.employe = employe;
     }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+
+
 }

@@ -84,7 +84,7 @@ public class RoomController {
         }
 
         // Update the room's extent, if it was provided in the request body
-        Boolean extent = updatedRoom.getExtent();
+        Boolean extent = updatedRoom.isExtent();
         if (extent != null) {
             room.setExtent(extent);
         }

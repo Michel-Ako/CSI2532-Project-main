@@ -3,8 +3,13 @@ package com.example.myhotel.model;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Hotel")
+@Table(name = "hotel")
 public class Hotel {
+
+    @ManyToOne
+    @JoinColumn(name = "nom_chaine")
+    private Chain chaineHoteliere;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_hotel", nullable = false)

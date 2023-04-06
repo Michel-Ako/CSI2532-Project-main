@@ -7,10 +7,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "Clients", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"SSN"})
-})
+@Table(name = "client")
 public class Clients {
+
+    @ManyToOne
+    @JoinColumn(name = "id_employe")
+    private Employee employe;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

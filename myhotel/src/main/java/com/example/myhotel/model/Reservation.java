@@ -14,8 +14,13 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "Reservation")
+@Table(name = "reservation")
 public class Reservation {
+
+    @ManyToOne
+    @JoinColumn(name = "numero_archive")
+    private Archives archive;
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reservation_ID", nullable = false)
@@ -32,10 +37,6 @@ public class Reservation {
 
     @Column(name = "roomNumber")
     private int roomNumber;
-
-    @ManyToOne(targetEntity = Archives.class)
-    @JoinColumn(name = "noArchive", referencedColumnName = "noArchive")
-    private Archives archive;
 
     @ManyToOne(targetEntity = Clients.class)
     @JoinColumn(name = "client_ID", referencedColumnName = "client_ID")
