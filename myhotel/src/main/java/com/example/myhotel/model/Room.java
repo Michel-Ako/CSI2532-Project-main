@@ -1,34 +1,28 @@
 package com.example.myhotel.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.JoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "chambre")
 public class Room {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "roomNumber", nullable = false)
+    private int roomNumber;
+
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Clients client;
 
     @ManyToOne
-    @JoinColumn(name = "id_employe")
-    private Employee employe;
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
 
     @ManyToOne
-    @JoinColumn(name = "id_hotel")
+    @JoinColumn(name = "hotel_id")
     private Hotel hotel;
-
-    @Id
-    @Column(name = "roomNumber", nullable = false)
-    private int roomNumber;
 
     @Column(name = "RoomType", nullable = false)
     private String roomType;
@@ -73,7 +67,7 @@ public class Room {
         this.status = status;
         this.hotel = hotel;
         this.client = client;
-        this.employe = employe;
+        this.employee = employe;
     }
 
     public int getRoomNumber() {
@@ -164,11 +158,11 @@ public class Room {
     }
 
     public Employee getEmploye() {
-        return employe;
+        return employee;
     }
 
     public void setEmploye(Employee employe) {
-        this.employe = employe;
+        this.employee = employe;
     }
 
     public Hotel getHotel() {

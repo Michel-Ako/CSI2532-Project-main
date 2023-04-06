@@ -2,7 +2,7 @@ package com.example.myhotel.controller;
 
 import com.example.myhotel.model.Clients;
 import com.example.myhotel.model.Rent;
-import com.example.myhotel.service.implementation.ClientsService;
+import com.example.myhotel.service.ClientsService;
 import com.example.myhotel.service.implementation.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -63,7 +63,7 @@ public class RentController {
         }
 
         // Update the rent's client ID, if it was provided in the request body
-        Long clientId = updatedRent.getCustomer().getID();
+        Long clientId = Long.valueOf(updatedRent.getCustomer().getID());
         if (clientId != null) {
             rent.setCustomer(clientsService.findById(clientId));
         }

@@ -1,77 +1,43 @@
-package com.example.myhotel.service.implementation;
-import com.example.myhotel.model.Chain;
-import com.example.myhotel.repository.ClientsRepository;
+package com.example.myhotel.service;
 
 import com.example.myhotel.model.Clients;
-import com.example.myhotel.service.IClientsService;
-import com.example.myhotel.service.IClientsService;
+import com.example.myhotel.repository.ClientsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class ClientsService implements IClientsService {
+public class ClientsService {
 
     @Autowired
     private ClientsRepository clientsRepository;
 
-    @Override
-    public Clients findById(Long ID) {
-        return clientsRepository.findById(ID).orElse(null);
+    public List<Clients> getAllClients() {
+        return clientsRepository.findAll();
     }
 
-    public List<Clients> findByHotelID(Long ID) {
-        return clientsRepository.findByHotelID(ID);
+    public Clients getClientById(Long id) {
+        return clientsRepository.findById(id).orElse(null);
     }
 
-    @Override
-    public List<Clients> findByName(String name) {
-        return clientsRepository.findByName(name);
-    }
-
-    @Override
-    public List<Clients> findBySSN(int SSN) {
-        return clientsRepository.findBySSN(SSN);
-    }
-
-    @Override
-    public List<Clients> findByHotelID(long id) {
-        return clientsRepository.findByHotelID(id);
-    }
-
-    @Override
-    public void changeCheckInDate(Long ID, LocalDate checkin) {
-        Clients client = findById(ID);
-        client.setCheckin(checkin);
-        clientsRepository.save(client);
-    }
-
-    @Override
-    public void changePaymentStatus(Long ID, String paymentStatus) {
-        Clients client = findById(ID);
-        client.setPayment(paymentStatus);
-        clientsRepository.save(client);
-    }
-    public List<Clients> findByPaymentStatus(String status){
-        return clientsRepository.findByPaymentStatus(status);
-    }
-
-    @Override
-    public Clients save(Clients client) {
+    public Clients createClient(Clients client) {
         return clientsRepository.save(client);
     }
 
-    @Override
-    public void delete(Clients client) {
-        clientsRepository.delete(client);
+    public Clients updateClient(Long id, Clients clientDetails) {
+        Clients client = getClientById(id);
+        if (client != null) {
+            client.setFirstName(clientDetails.getFirstName());
+            client.setLastName(clientDetails.getLastName());
+            client.setPhone(clientDetails.getPhone());
+            client.setEmail(clientDetails.getEmail());
+            return clientsRepository.save(client);
+        }
+        return null;
     }
 
-    @Override
-    public List<Clients> findAll() {
-        Iterable<Clients> clientIterable = clientsRepository.findAll();
-        return clientIterable != null ? (List<Clients>) clientIterable : new ArrayList<>();
+    public void deleteClient(Long id) {
+        clientsRepository.deleteById(id);
     }
 }

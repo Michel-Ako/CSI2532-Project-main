@@ -1,23 +1,21 @@
 package com.example.myhotel.model;
 
-import java.time.LocalDate;
-import com.example.myhotel.model.Employee;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "client")
+@Table(name = "clients")
 public class Clients {
-
-    @ManyToOne
-    @JoinColumn(name = "id_employe")
-    private Employee employe;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_ID", nullable = false)
-    private Long client_ID;
+    @Column(name = "client_id", nullable = false)
+    private int client_ID;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Room> rooms;
 
     @Column(name = "name", nullable = false)
     private String name;
@@ -45,7 +43,7 @@ public class Clients {
     private Employee ID_employee;
 
     public Clients(Long ID, String name, String address, int SSN, String payment, LocalDate checkin, Hotel ID_Hotel, Employee ID_employee) {
-        this.client_ID = ID;
+        this.client_ID = Math.toIntExact(ID);
         this.name = name;
         this.address = address;
         this.SSN = SSN;
@@ -58,12 +56,12 @@ public class Clients {
     public Clients() {
     }
 
-    public Long getID() {
+    public int getID() {
         return client_ID;
     }
 
     public void setID(Long ID) {
-        this.client_ID = ID;
+        this.client_ID = Math.toIntExact(ID);
     }
 
     public String getName() {

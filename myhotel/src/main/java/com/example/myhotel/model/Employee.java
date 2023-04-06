@@ -2,17 +2,19 @@ package com.example.myhotel.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.List;
 
 @Entity
-@Table(name = "employe", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {"SSN"})
-})
+@Table(name = "employee")
 public class Employee {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "employee_ID")
-    private Long employee_ID;
+    @Column(name = "employee_id", nullable = false)
+    private int employee_ID;
 
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Room> rooms;
     @Column(name = "name", nullable = false)
     private String name;
 
@@ -31,7 +33,7 @@ public class Employee {
     private Hotel hotel;
 
     public Employee(Long id, String name, String address, String ssn, String post, Hotel hotel) {
-        this.employee_ID = id;
+        this.employee_ID = Math.toIntExact(id);
         this.name = name;
         this.address = address;
         this.ssn = ssn;
@@ -43,11 +45,11 @@ public class Employee {
     }
 
     public Long getId() {
-        return employee_ID;
+        return Long.valueOf(employee_ID);
     }
 
     public void setId(Long id) {
-        this.employee_ID = id;
+        this.employee_ID = Math.toIntExact(id);
     }
 
     public String getName() {

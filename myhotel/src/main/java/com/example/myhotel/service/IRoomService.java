@@ -1,12 +1,10 @@
 package com.example.myhotel.service;
 
 import com.example.myhotel.model.Room;
-import com.example.myhotel.model.RoomType;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public interface IRoomService {
     List<Room> findAvailableRooms(int minCapacity, int maxCapacity,

@@ -1,19 +1,19 @@
 package com.example.myhotel.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "hotel")
 public class Hotel {
 
-    @ManyToOne
-    @JoinColumn(name = "nom_chaine")
-    private Chain chaineHoteliere;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_hotel", nullable = false)
-    private Long hotelID;
+    private Long id;
+
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Room> rooms;
 
     @Column(name = "gestionnaireID")
     private String gestionnaireID;
@@ -54,11 +54,11 @@ public class Hotel {
     }
 
     public Long getHotelID() {
-        return hotelID;
+        return id;
     }
 
     public void setHotelID(Long hotelID) {
-        this.hotelID = hotelID;
+        this.id = hotelID;
     }
 
     public String getGestionnaireID() {
@@ -128,7 +128,7 @@ public class Hotel {
     @java.lang.Override
     public java.lang.String toString() {
         return "Hotel{" +
-                "hotelID=" + hotelID +
+                "hotelID=" + id +
                 ", gestionnaireID=" + gestionnaireID +
                 ", name='" + name + '\'' +
                 ", rating=" + rating +
