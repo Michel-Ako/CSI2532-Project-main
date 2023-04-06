@@ -11,77 +11,84 @@ public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employee_id", nullable = false)
-    private int employee_ID;
+    private Long id;
 
     @OneToMany(mappedBy = "employee", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Room> rooms;
-    @Column(name = "name", nullable = false)
-    private String name;
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
 
-    @Column(name = "ssn", nullable = false)
-    private String ssn;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
 
-    @Column(name = "post", nullable = false)
-    private String post;
+    @Column(name = "phone", nullable = false)
+    private String phone;
+
+    @Column(name = "email", nullable = false)
+    private String email;
 
     @ManyToOne
-    @JoinColumn(name = "id_hotel", referencedColumnName = "id_hotel")
-    @NotBlank(message = "Hotel ID required")
+    @JoinColumn(name = "hotel_id", referencedColumnName = "id")
     private Hotel hotel;
-
-    public Employee(Long id, String name, String address, String ssn, String post, Hotel hotel) {
-        this.employee_ID = Math.toIntExact(id);
-        this.name = name;
-        this.address = address;
-        this.ssn = ssn;
-        this.post = post;
-        this.hotel = hotel;
-    }
 
     public Employee() {
     }
 
+    public Employee(String firstName, String lastName, String phone, String email, Hotel hotel) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.email = email;
+        this.hotel = hotel;
+    }
+
     public Long getId() {
-        return Long.valueOf(employee_ID);
+        return id;
     }
 
     public void setId(Long id) {
-        this.employee_ID = Math.toIntExact(id);
+        this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public List<Room> getRooms() {
+        return rooms;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
-    public String getAddress() {
-        return address;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getSsn() {
-        return ssn;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setSsn(String ssn) {
-        this.ssn = ssn;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getPost() {
-        return post;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPost(String post) {
-        this.post = post;
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Hotel getHotel() {
@@ -95,11 +102,11 @@ public class Employee {
     @Override
     public String toString() {
         return "Employee{" +
-                "id=" + employee_ID +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", ssn='" + ssn + '\'' +
-                ", post='" + post + '\'' +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", phone='" + phone + '\'' +
+                ", email='" + email + '\'' +
                 ", hotel=" + hotel +
                 '}';
     }

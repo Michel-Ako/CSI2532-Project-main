@@ -1,4 +1,4 @@
-package com.example.myhotel.service;
+package com.example.myhotel.service.implementation;
 
 import com.example.myhotel.model.Hotel;
 import com.example.myhotel.repository.HotelRepository;
@@ -18,7 +18,7 @@ public class HotelService {
     }
 
     public Hotel getHotelById(Long id) {
-        return hotelRepository.findById(id).orElse(null);
+        return hotelRepository.findById(Math.toIntExact(id)).orElse(null);
     }
 
     public Hotel createHotel(Hotel hotel) {
@@ -37,6 +37,6 @@ public class HotelService {
     }
 
     public void deleteHotel(Long id) {
-        hotelRepository.deleteById(id);
+        hotelRepository.deleteById(Math.toIntExact(id));
     }
 }

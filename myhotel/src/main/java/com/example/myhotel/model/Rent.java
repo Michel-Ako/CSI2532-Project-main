@@ -1,4 +1,5 @@
 package com.example.myhotel.model;
+
 import java.time.LocalDate;
 
 import javax.persistence.Column;
@@ -11,14 +12,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
-import com.example.myhotel.model.Clients;
+
 @Entity
 @Table(name = "Rent")
 public class Rent {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rent_ID", nullable = false)
-    private Long rent_ID;
+    private Long id;
 
     @Column(name = "rentdate", nullable = false)
     private LocalDate rentdate;
@@ -35,7 +37,7 @@ public class Rent {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "client_ID", referencedColumnName = "client_ID")
     @NotBlank(message = "Client ID required")
-    private Clients ID_customer;
+    private Clients client;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "noArchive", referencedColumnName = "noArchive")
@@ -45,21 +47,21 @@ public class Rent {
     public Rent() {
     }
 
-    public Rent(LocalDate rentdate, LocalDate startrent, LocalDate enddate, int noRoom, Clients ID_customer, Archives noArchives) {
+    public Rent(LocalDate rentdate, LocalDate startrent, LocalDate enddate, int noRoom, Clients client, Archives noArchives) {
         this.rentdate = rentdate;
         this.startrent = startrent;
         this.enddate = enddate;
         this.noRoom = noRoom;
-        this.ID_customer = ID_customer;
+        this.client = client;
         this.noArchives = noArchives;
     }
 
-    public Long getID() {
-        return rent_ID;
+    public Long getId() {
+        return id;
     }
 
-    public void setID(Long ID) {
-        this.rent_ID = ID;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public LocalDate getRentdate() {
@@ -94,12 +96,12 @@ public class Rent {
         this.noRoom = noRoom;
     }
 
-    public Clients getCustomer() {
-        return ID_customer;
+    public Clients getClient() {
+        return client;
     }
 
-    public void setCustomer(Clients ID_customer) {
-        this.ID_customer = ID_customer;
+    public void setClient(Clients client) {
+        this.client = client;
     }
 
     public Archives getNoArchives() {
@@ -113,14 +115,13 @@ public class Rent {
     @Override
     public String toString() {
         return "Rent{" +
-                "ID='" + rent_ID + '\'' +
+                "id='" + id + '\'' +
                 ", rentdate=" + rentdate +
                 ", startrent=" + startrent +
                 ", enddate=" + enddate +
                 ", noRoom='" + noRoom + '\'' +
-                ", ID_customer=" + ID_customer +
+                ", client=" + client +
                 ", noArchives=" + noArchives +
                 '}';
     }
 }
-

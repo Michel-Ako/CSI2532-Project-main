@@ -28,7 +28,7 @@ public class Hotel {
     private String address;
 
     @Column(name = "phone")
-    private String phone;
+    private String phoneNumber;
 
     @Column(name = "email")
     private String email;
@@ -42,23 +42,31 @@ public class Hotel {
 
     public Hotel() {}
 
-    public Hotel(String gestionnaireID, String name, int rating, String address, String phone, String email, Integer noRooms, Chain chain) {
+    public Hotel(String gestionnaireID, String name, int rating, String address, String phoneNumber, String email, Integer noRooms, Chain chain) {
         this.gestionnaireID = gestionnaireID;
         this.name = name;
         this.rating = rating;
         this.address = address;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
         this.email = email;
         this.noRooms = noRooms;
         this.chain = chain;
     }
 
-    public Long getHotelID() {
+    public Long getId() {
         return id;
     }
 
-    public void setHotelID(Long hotelID) {
-        this.id = hotelID;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Room> getRooms() {
+        return rooms;
+    }
+
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 
     public String getGestionnaireID() {
@@ -93,12 +101,12 @@ public class Hotel {
         this.address = address;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
     public String getEmail() {
@@ -125,20 +133,19 @@ public class Hotel {
         this.chain = chain;
     }
 
-    @java.lang.Override
-    public java.lang.String toString() {
+    @Override
+    public String toString() {
         return "Hotel{" +
-                "hotelID=" + id +
-                ", gestionnaireID=" + gestionnaireID +
+                "id=" + id +
+                ", rooms=" + rooms +
+                ", gestionnaireID='" + gestionnaireID + '\'' +
                 ", name='" + name + '\'' +
                 ", rating=" + rating +
                 ", address='" + address + '\'' +
-                ", phone='" + phone + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", noRooms=" + noRooms +
                 ", chain=" + chain +
                 '}';
     }
 }
-
-

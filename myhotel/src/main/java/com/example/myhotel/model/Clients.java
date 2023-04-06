@@ -1,8 +1,14 @@
 package com.example.myhotel.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -11,129 +17,85 @@ public class Clients {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "client_id", nullable = false)
-    private int client_ID;
+    @Column(name = "client_ID", nullable = false)
+    private Long clientID;
 
-    @OneToMany(mappedBy = "client", cascade = CascadeType.ALL, orphanRemoval = true)
+    @NotBlank(message = "First name is required")
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+
+    @NotBlank(message = "Last name is required")
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Email should be valid")
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    @NotBlank(message = "Phone number is required")
+    @Column(name = "phone_number", nullable = false, unique = true)
+    private String phoneNumber;
+
+    @OneToMany(mappedBy = "client")
     private List<Room> rooms;
-
-    @Column(name = "name", nullable = false)
-    private String name;
-
-    @Column(name = "address")
-    private String address;
-
-    @Column(name = "SSN", nullable = false)
-    private int SSN;
-
-    @Column(name = "payment", nullable = false)
-    private String payment;
-
-    @Column(name = "checkin", nullable = false)
-    private LocalDate checkin;
-
-    @ManyToOne(targetEntity = Hotel.class)
-    @JoinColumn(name = "id_hotel", referencedColumnName = "id_hotel")
-    @NotBlank(message = "Hotel ID required")
-    private Hotel ID_Hotel;
-
-    @ManyToOne(targetEntity = Employee.class)
-    @JoinColumn(name = "employee_ID", referencedColumnName = "employee_ID")
-    @NotBlank(message = "Employee ID required")
-    private Employee ID_employee;
-
-    public Clients(Long ID, String name, String address, int SSN, String payment, LocalDate checkin, Hotel ID_Hotel, Employee ID_employee) {
-        this.client_ID = Math.toIntExact(ID);
-        this.name = name;
-        this.address = address;
-        this.SSN = SSN;
-        this.payment = payment;
-        this.checkin = checkin;
-        this.ID_Hotel = ID_Hotel;
-        this.ID_employee = ID_employee;
-    }
 
     public Clients() {
     }
 
-    public int getID() {
-        return client_ID;
+    public Clients(Long clientID, String firstName, String lastName, String email, String phoneNumber) {
+        this.clientID = clientID;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setID(Long ID) {
-        this.client_ID = Math.toIntExact(ID);
+    public Long getClientID() {
+        return clientID;
     }
 
-    public String getName() {
-        return name;
+    public void setClientID(Long clientID) {
+        this.clientID = clientID;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public String getAddress() {
-        return address;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getLastName() {
+        return lastName;
     }
 
-    public int getSSN() {
-        return SSN;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public void setSSN(int SSN) {
-        this.SSN = SSN;
+    public String getEmail() {
+        return email;
     }
 
-    public String getPayment() {
-        return payment;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public void setPayment(String payment) {
-        this.payment = payment;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public LocalDate getCheckin() {
-        return checkin;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setCheckin(LocalDate checkin) {
-        this.checkin = checkin;
+    public List<Room> getRooms() {
+        return rooms;
     }
 
-    public Hotel getHotel() {
-        return ID_Hotel;
-    }
-
-    public void setHotel(Hotel ID_Hotel) {
-        this.ID_Hotel = ID_Hotel;
-    }
-
-    public Employee getID_employee() {
-        return ID_employee;
-    }
-
-    public void setID_employee(Employee ID_employee) {
-        this.ID_employee = ID_employee;
-    }
-
-
-    @java.lang.Override
-    public java.lang.String toString() {
-        return "Clients{" +
-                "ID=" + client_ID +
-                ", name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", SSN=" + SSN +
-                ", payment='" + payment + '\'' +
-                ", checkin=" + checkin +
-                ", ID_Hotel=" + ID_Hotel +
-                ", ID_employee=" + ID_employee +
-                '}';
+    public void setRooms(List<Room> rooms) {
+        this.rooms = rooms;
     }
 }
-
-

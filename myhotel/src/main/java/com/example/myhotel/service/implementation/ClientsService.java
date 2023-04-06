@@ -1,4 +1,4 @@
-package com.example.myhotel.service;
+package com.example.myhotel.service.implementation;
 
 import com.example.myhotel.model.Clients;
 import com.example.myhotel.repository.ClientsRepository;
@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientsService {
@@ -17,8 +18,8 @@ public class ClientsService {
         return clientsRepository.findAll();
     }
 
-    public Clients getClientById(Long id) {
-        return clientsRepository.findById(id).orElse(null);
+    public Optional<Clients> getClientById(Integer id) {
+        return clientsRepository.findById(id);
     }
 
     public Clients createClient(Clients client) {
@@ -26,11 +27,11 @@ public class ClientsService {
     }
 
     public Clients updateClient(Long id, Clients clientDetails) {
-        Clients client = getClientById(id);
+        Clients client = getClientById(Math.toIntExact(id)).orElse(null);
         if (client != null) {
             client.setFirstName(clientDetails.getFirstName());
             client.setLastName(clientDetails.getLastName());
-            client.setPhone(clientDetails.getPhone());
+            client.setPhoneNumber(clientDetails.getPhoneNumber());
             client.setEmail(clientDetails.getEmail());
             return clientsRepository.save(client);
         }
@@ -38,6 +39,6 @@ public class ClientsService {
     }
 
     public void deleteClient(Long id) {
-        clientsRepository.deleteById(id);
+        clientsRepository.deleteById(Math.toIntExact(id));
     }
 }
