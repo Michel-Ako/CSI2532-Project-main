@@ -14,6 +14,10 @@ public class ClientsService {
     @Autowired
     private ClientsRepository clientsRepository;
 
+    public Clients findById(Long id) {
+        return clientsRepository.findById(Math.toIntExact(id)).orElse(null);
+    }
+
     public List<Clients> getAllClients() {
         return clientsRepository.findAll();
     }

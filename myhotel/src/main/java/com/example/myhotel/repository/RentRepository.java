@@ -1,53 +1,44 @@
 package com.example.myhotel.repository;
+
 import com.example.myhotel.model.Rent;
 import com.example.myhotel.utils.Queries;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.data.repository.query.Param;
-import org.springframework.stereotype.Repository;
-
 @Repository
-public interface RentRepository extends CrudRepository<Rent, Long> {
+public interface RentRepository extends JpaRepository<Rent, Long> {
 
+    Optional<Rent> findByRentId(Long rentId);
 
-    @Query(value = Queries.findAllRentByID, nativeQuery = true)
-    Optional<Rent> findByNumber(@Param("rent_ID") Long rent_ID);
+    List<Rent> findByRentDate(LocalDate rentDate);
 
+    Rent findByRoomNumber(int roomNumber);
 
-    @Query(value = Queries.findAllRentByDate, nativeQuery = true)
-    List<Rent> findByDate(@Param("rentdate") LocalDate rentdate);
+    List<Rent> findByClientId(long clientId);
 
-    @Query(value = "SELECT * FROM reservations WHERE room_number = :roomNumber;", nativeQuery = true)
-    Rent findByRoomNumber(@Param("roomNumber") int roomNumber);
+    List<Rent> findByStartDate(LocalDate startDate);
 
-    @Query(value = "SELECT * FROM reservations WHERE client_ID = :client_ID;", nativeQuery = true)
-    List<Rent> findByClientID(@Param("client_ID") long client_ID);
-
-    @Query(value = Queries.findAllRentByStartDate, nativeQuery = true)
-    List<Rent> findByStartDate(@Param("startdate") LocalDate startdate);
-
-
-    @Query(value = Queries.findAllRentByEndDate, nativeQuery = true)
-    List<Rent> findByEndDate(@Param("enddate") LocalDate enddate);
+    List<Rent> findByEndDate(LocalDate endDate);
 
     @Modifying
     @Query(value = Queries.changeDate, nativeQuery = true)
-    void changeDate(@Param("rent_ID") Long rent_ID, @Param("rentdate") LocalDate rentdate);
+    void changeDate(@Param("rentId") Long rentId, @Param("rentDate") LocalDate rentDate);
 
     @Modifying
     @Query(value = Queries.changeStartDate, nativeQuery = true)
-    void changeStartDate(@Param("rent_ID") Long rent_ID, @Param("startdate") LocalDate startdate);
+    void changeStartDate(@Param("rentId") Long rentId, @Param("startDate") LocalDate startDate);
 
     @Modifying
     @Query(value = Queries.changeEndDate, nativeQuery = true)
-    void changeEndDate(@Param("rent_ID") Long rent_ID, @Param("enddate") LocalDate enddate);
-
+    void changeEndDate(@Param("rentId") Long rentId, @Param("endDate") LocalDate endDate);
 
     @Override
     Rent save(Rent rent);

@@ -5,13 +5,11 @@ import com.example.myhotel.service.implementation.ClientsService;
 import com.example.myhotel.service.implementation.ReservationService;
 import com.example.myhotel.service.implementation.RoomService;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +26,6 @@ public class ReservationController {
     @Autowired
     private ClientsService clientsService;
 
-
     @PostMapping("/makeReservation")
     public ResponseEntity<String> makeReservation(
             @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
@@ -44,7 +41,7 @@ public class ReservationController {
             }
         }
         if (reservations.isEmpty()) {
-            Reservation reservation = new Reservation(startDate, endDate, roomNumber, null, clientsService.findById(customerID));
+            Reservation reservation = new Reservation(startDate, endDate, roomNumber, clientsService.findById(customerID));
             reservationService.save(reservation);
             return ResponseEntity.ok("Reservation made successfully");
         } else {
@@ -72,7 +69,7 @@ public class ReservationController {
         Reservation reservation = reservationService.findByID(reservationID);
         if (reservation != null) {
             // set reservation status to "reserved"
-            roomService.findByRoomNumber(roomNumber).setStatus("Reserved");
+            roomService.getRoomById(roomNumber).setStatus("Reserved");
             reservationService.save(reservation);
             return ResponseEntity.ok("Room reserved successfully");
         } else {
@@ -80,7 +77,21 @@ public class ReservationController {
         }
     }
 
-    @PutMapping("/reservations/{id}")
+    @GetMapping
+    public List<Reservation> getAllReservations() {
+        return reservationService.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
+        Reservation reservation = reservationService.findByID(id);
+        if (reservation == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(reservation);
+    }
+
+    @PutMapping("/{id}")
     public ResponseEntity<?> updateReservation(@PathVariable Long id, @RequestBody Reservation updatedReservation) {
         Reservation reservation = reservationService.findByID(id);
         if (reservation == null) {
@@ -132,6 +143,4 @@ public class ReservationController {
 
         return ResponseEntity.ok().body(reservation);
     }
-
-
 }

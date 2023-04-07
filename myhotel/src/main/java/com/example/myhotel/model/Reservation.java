@@ -1,71 +1,50 @@
 package com.example.myhotel.model;
 
-import java.sql.Timestamp;
-import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.PrePersist;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "reservation")
 public class Reservation {
-
-    @ManyToOne
-    @JoinColumn(name = "numero_archive")
-    private Archives archive;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "reservation_ID", nullable = false)
-    private int reservationID;
+    private Long reservationID;
 
-    @Column(name = "reservationdate")
-    private LocalDate reservationDate;
-
-    @Column(name = "startdate")
+    @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
 
-    @Column(name = "enddate")
+    @Column(name = "end_date", nullable = false)
     private LocalDate endDate;
 
-    @Column(name = "roomNumber")
+    @Column(name = "room_number", nullable = false)
     private int roomNumber;
 
-    @ManyToOne(targetEntity = Clients.class)
-    @JoinColumn(name = "client_ID", referencedColumnName = "client_ID")
-    private Clients client_ID;
+    @Column(name = "archive_number")
+    private int archiveNumber;
 
-    public Reservation() {}
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "client_id", nullable = false)
+    @JsonIgnore
+    private Clients client;
 
-    public Reservation(LocalDate startDate, LocalDate endDate, int roomNumber, Archives archive, Clients client) {
+    public Reservation() {
+    }
+
+    public Reservation(LocalDate startDate, LocalDate endDate, int roomNumber, Clients client) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.roomNumber = roomNumber;
-        this.archive = archive;
-        this.client_ID = client;
+        this.client = client;
     }
 
-    public int getReservationID() {
+    public Long getReservationID() {
         return reservationID;
     }
 
-    public void setReservationID(int reservationID) {
+    public void setReservationID(Long reservationID) {
         this.reservationID = reservationID;
-    }
-
-    public LocalDate getReservationDate() {
-        return reservationDate;
-    }
-
-    public void setReservationDate(LocalDate reservationDate) {
-        this.reservationDate = reservationDate;
     }
 
     public LocalDate getStartDate() {
@@ -92,31 +71,31 @@ public class Reservation {
         this.roomNumber = roomNumber;
     }
 
-    public Archives getArchive() {
-        return archive;
+    public int getArchiveNumber() {
+        return archiveNumber;
     }
 
-    public void setArchive(Archives archive) {
-        this.archive = archive;
+    public void setArchiveNumber(int archiveNumber) {
+        this.archiveNumber = archiveNumber;
     }
 
     public Clients getClient() {
-        return client_ID;
+        return client;
     }
 
     public void setClient(Clients client) {
-        this.client_ID = client;
-    }
-
-    @PrePersist
-    public void prePersist(){
-        this.reservationDate = reservationDate;
+        this.client = client;
     }
 
     @Override
     public String toString() {
-        return "Reservation{" + "reservationID=" + reservationID + ", reservationDate=" + reservationDate
-                + ", startDate=" + startDate + ", endDate=" + endDate + ", roomNumber=" + roomNumber
-                + ", archive=" + archive + ", client=" + client_ID + '}';
+        return "Reservation{" +
+                "reservationID=" + reservationID +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", roomNumber=" + roomNumber +
+                ", archiveNumber=" + archiveNumber +
+                ", client=" + client +
+                '}';
     }
 }

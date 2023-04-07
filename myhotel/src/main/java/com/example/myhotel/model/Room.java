@@ -17,7 +17,7 @@ public class Room {
     private Clients client;
 
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "id_gestionnaire")
     private Employee employee;
 
     @ManyToOne
@@ -54,7 +54,7 @@ public class Room {
     public Room() {
     }
 
-    public Room(int roomNumber, String roomType, double price, String capacity, String view, boolean extent, String damage, String amenities, boolean availability, String status, Hotel hotel, Clients client, Employee employe) {
+    public Room(int roomNumber, String roomType, double price, String capacity, String view, boolean extent, String damage, String amenities, boolean availability, String status, Hotel hotel, Clients client) {
         this.roomNumber = roomNumber;
         this.roomType = roomType;
         this.price = price;
@@ -67,19 +67,30 @@ public class Room {
         this.status = status;
         this.hotel = hotel;
         this.client = client;
-        this.employee = employe;
     }
 
-    public int getRoomNumber() {
-        return roomNumber;
+    public Clients getClient() {
+        return client;
     }
 
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
+    public void setClient(Clients client) {
+        this.client = client;
     }
 
-    public String getRoomType() {
-        return roomType;
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+    public Hotel getHotel() {
+        return hotel;
+    }
+
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
     }
 
     public void setRoomType(String roomType) {
@@ -149,30 +160,16 @@ public class Room {
     public void setStatus(String status) {
         this.status = status;
     }
-    public Clients getClientID() {
-        return client;
+
+    public int getRoomNumber() {
+        return roomNumber;
     }
 
-    public void setClient(Clients client) {
-        this.client = client;
+    public void setRoomNumber(int roomNumber) {
+        this.roomNumber = roomNumber;
     }
 
-    public Employee getEmploye() {
-        return employee;
+    public String getRoomType() {
+        return roomType;
     }
-
-    public void setEmploye(Employee employe) {
-        this.employee = employe;
-    }
-
-    public Hotel getHotel() {
-        return hotel;
-    }
-
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
-
-
-
 }

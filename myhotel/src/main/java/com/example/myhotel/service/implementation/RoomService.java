@@ -1,4 +1,4 @@
-package com.example.myhotel.service;
+package com.example.myhotel.service.implementation;
 
 import com.example.myhotel.model.Room;
 import com.example.myhotel.repository.RoomRepository;
@@ -31,14 +31,14 @@ public class RoomService {
             room.setPrice(roomDetails.getPrice());
             room.setCapacity(roomDetails.getCapacity());
             room.setView(roomDetails.getView());
-            room.setExtent(roomDetails.getExtent());
+            room.setExtent(roomDetails.isExtent());
             room.setDamage(roomDetails.getDamage());
             room.setAmenities(roomDetails.getAmenities());
             room.setAvailability(roomDetails.isAvailability());
             room.setStatus(roomDetails.getStatus());
-            room.setHotelID(roomDetails.getHotelID());
-            room.setClientID(roomDetails.getClientID());
-            room.setEmployeeID(roomDetails.getEmployeeID());
+            room.setHotel(roomDetails.getHotel());
+            room.setClient(roomDetails.getClient());
+            room.setEmployee(roomDetails.getEmployee());
             return roomRepository.save(room);
         }
         return null;
@@ -48,4 +48,3 @@ public class RoomService {
         roomRepository.deleteById(id);
     }
 }
-

@@ -3,10 +3,12 @@ package com.example.myhotel.controller;
 import com.example.myhotel.model.Rent;
 import com.example.myhotel.service.RentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/rents")
@@ -22,7 +24,11 @@ public class RentController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Rent> getRentById(@PathVariable Long id) {
-        return rentService.getRentById(id);
+        Optional<Rent> rent = rentService.getRentById(id);
+        if (rent.isPresent()) {
+            return new ResponseEntity<>(rent.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @PostMapping
@@ -32,11 +38,17 @@ public class RentController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Rent> updateRent(@PathVariable Long id, @RequestBody Rent rentDetails) {
-        return rentService.updateRent(id, rentDetails);
+        Rent updatedRent = rentService.updateRent(id, rentDetails);
+        if (updatedRent != null) {
+            return new ResponseEntity<>(updatedRent, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteRent(@PathVariable Long id) {
-        return rentService.deleteRent(id);
+        rentService.deleteRent(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
 }
