@@ -63,5 +63,4 @@ public class Employee {
         this.poste = poste;
     }
 
-    // getters and setters
 }

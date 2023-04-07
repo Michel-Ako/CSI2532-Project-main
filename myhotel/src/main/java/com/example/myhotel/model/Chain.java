@@ -62,5 +62,5 @@ public class Chain {
         this.nombreHotels = nombreHotels;
     }
 
-    // getters and setters
+
 }
