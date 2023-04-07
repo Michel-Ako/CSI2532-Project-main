@@ -5,10 +5,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "chambre")
 public class Room {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
 
+    @Id
     @Column(name = "numero_chambre")
     private int numeroChambre;
 
@@ -30,14 +28,6 @@ public class Room {
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public int getNumeroChambre() {
         return numeroChambre;
