@@ -1,87 +1,66 @@
 package com.example.myhotel.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "chaine_hoteliere")
 public class Chain {
 
     @Id
-    @Column(name = "chain_name", nullable = false)
-    private String name;
+    @Column(name = "nom_chaine")
+    private String nomChaine;
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "adresse_bureau")
+    private String adresseBureau;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "adresse_email")
+    private String adresseEmail;
 
-    @Column(name = "phone")
-    private String phone;
+    @Column(name = "numero_telephone")
+    private String numeroTelephone;
 
-    @Column(name = "noHotels")
-    private int noHotels;
+    @Column(name = "nombre_hotels")
+    private Integer nombreHotels;
 
-    public Chain(String name, String address, String email, String number, int noHotels) {
-        this.name = name;
-        this.address = address;
-        this.email = email;
-        this.phone = number;
-        this.noHotels = noHotels;
+    public String getNomChaine() {
+        return nomChaine;
     }
 
-    public String getName() {
-        return name;
+    public void setNomChaine(String nomChaine) {
+        this.nomChaine = nomChaine;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getAdresseBureau() {
+        return adresseBureau;
     }
 
-    public String getAddress() {
-        return address;
+    public void setAdresseBureau(String adresseBureau) {
+        this.adresseBureau = adresseBureau;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getAdresseEmail() {
+        return adresseEmail;
     }
 
-    public String getEmail() {
-        return email;
+    public void setAdresseEmail(String adresseEmail) {
+        this.adresseEmail = adresseEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getNumeroTelephone() {
+        return numeroTelephone;
     }
 
-    public String getNumber() {
-        return phone;
+    public void setNumeroTelephone(String numeroTelephone) {
+        this.numeroTelephone = numeroTelephone;
     }
 
-    public void setNumber(String number) {
-        this.phone = number;
+    public Integer getNombreHotels() {
+        return nombreHotels;
     }
 
-    public int getNoHotels() {
-        return noHotels;
+    public void setNombreHotels(Integer nombreHotels) {
+        this.nombreHotels = nombreHotels;
     }
 
-    public void setNoHotels(int noHotels) {
-        this.noHotels = noHotels;
-    }
-
-    @Override
-    public String toString() {
-        return "Chain{" +
-                "name='" + name + '\'' +
-                ", address='" + address + '\'' +
-                ", email='" + email + '\'' +
-                ", number='" + phone + '\'' +
-                ", noHotels=" + noHotels +
-                '}';
-    }
+    // getters and setters
 }
-

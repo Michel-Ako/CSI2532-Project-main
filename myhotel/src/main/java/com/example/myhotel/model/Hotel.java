@@ -1,151 +1,135 @@
 package com.example.myhotel.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.util.List;
-
 @Entity
 @Table(name = "hotel")
 public class Hotel {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_hotel", nullable = false)
-    private Long id;
+    @Column(name = "id_hotel")
+    private int idHotel;
 
-    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Room> rooms;
+    @Column(name = "id_gestionnaire")
+    private int idGestionnaire;
 
-    @Column(name = "gestionnaireID")
-    private String gestionnaireID;
+    @Column(name = "nom_hotel")
+    private String nomHotel;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "nombre_etoiles")
+    private int nombreEtoiles;
 
-    @Column(name = "rating")
-    private int rating;
+    @Column(name = "adresse_hotel")
+    private String adresseHotel;
 
-    @Column(name = "address")
-    private String address;
+    @Column(name = "numero_telephone")
+    private String numeroTelephone;
 
-    @Column(name = "phone")
-    private String phoneNumber;
+    @Column(name = "adresse_email")
+    private String adresseEmail;
 
-    @Column(name = "email")
-    private String email;
+    @Column(name = "nombre_chambre")
+    private int nombreChambre;
 
-    @Column(name = "noRooms")
-    private Integer noRooms;
-
+    // ManyToOne relationship with ChaineHoteliere
     @ManyToOne
-    @JoinColumn(name = "chain_name", referencedColumnName = "chain_name")
-    private Chain chain;
+    @JoinColumn(name = "nom_chaine")
+    private Chain chaineHoteliere;
 
-    public Hotel() {}
+    // OneToMany relationship with Client
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    private List<Clients> clients;
 
-    public Hotel(String gestionnaireID, String name, int rating, String address, String phoneNumber, String email, Integer noRooms, Chain chain) {
-        this.gestionnaireID = gestionnaireID;
-        this.name = name;
-        this.rating = rating;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-        this.email = email;
-        this.noRooms = noRooms;
-        this.chain = chain;
+    // OneToMany relationship with Chambre
+    @OneToMany(mappedBy = "hotel", cascade = CascadeType.ALL)
+    private List<Room> chambres;
+
+    public int getIdHotel() {
+        return idHotel;
     }
 
-    public Long getId() {
-        return id;
+    public void setIdHotel(int idHotel) {
+        this.idHotel = idHotel;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public int getIdGestionnaire() {
+        return idGestionnaire;
     }
 
-    public List<Room> getRooms() {
-        return rooms;
+    public void setIdGestionnaire(int idGestionnaire) {
+        this.idGestionnaire = idGestionnaire;
     }
 
-    public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
+    public String getNomHotel() {
+        return nomHotel;
     }
 
-    public String getGestionnaireID() {
-        return gestionnaireID;
+    public void setNomHotel(String nomHotel) {
+        this.nomHotel = nomHotel;
     }
 
-    public void setGestionnaireID(String gestionnaireID) {
-        this.gestionnaireID = gestionnaireID;
+    public int getNombreEtoiles() {
+        return nombreEtoiles;
     }
 
-    public String getName() {
-        return name;
+    public void setNombreEtoiles(int nombreEtoiles) {
+        this.nombreEtoiles = nombreEtoiles;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getAdresseHotel() {
+        return adresseHotel;
     }
 
-    public int getRating() {
-        return rating;
+    public void setAdresseHotel(String adresseHotel) {
+        this.adresseHotel = adresseHotel;
     }
 
-    public void setRating(int rating) {
-        this.rating = rating;
+    public String getNumeroTelephone() {
+        return numeroTelephone;
     }
 
-    public String getAddress() {
-        return address;
+    public void setNumeroTelephone(String numeroTelephone) {
+        this.numeroTelephone = numeroTelephone;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public String getAdresseEmail() {
+        return adresseEmail;
     }
 
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public void setAdresseEmail(String adresseEmail) {
+        this.adresseEmail = adresseEmail;
     }
 
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
+    public int getNombreChambre() {
+        return nombreChambre;
     }
 
-    public String getEmail() {
-        return email;
+    public void setNombreChambre(int nombreChambre) {
+        this.nombreChambre = nombreChambre;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public Chain getChaineHoteliere() {
+        return chaineHoteliere;
     }
 
-    public Integer getNoRooms() {
-        return noRooms;
+    public void setChaineHoteliere(Chain chaineHoteliere) {
+        this.chaineHoteliere = chaineHoteliere;
     }
 
-    public void setNoRooms(Integer noRooms) {
-        this.noRooms = noRooms;
+    public List<Clients> getClients() {
+        return clients;
     }
 
-    public Chain getChain() {
-        return chain;
+    public void setClients(List<Clients> clients) {
+        this.clients = clients;
     }
 
-    public void setChain(Chain chain) {
-        this.chain = chain;
+    public List<Room> getChambres() {
+        return chambres;
     }
 
-    @Override
-    public String toString() {
-        return "Hotel{" +
-                "id=" + id +
-                ", rooms=" + rooms +
-                ", gestionnaireID='" + gestionnaireID + '\'' +
-                ", name='" + name + '\'' +
-                ", rating=" + rating +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", email='" + email + '\'' +
-                ", noRooms=" + noRooms +
-                ", chain=" + chain +
-                '}';
+    public void setChambres(List<Room> chambres) {
+        this.chambres = chambres;
     }
 }

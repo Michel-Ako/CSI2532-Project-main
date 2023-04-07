@@ -1,82 +1,44 @@
 package com.example.myhotel.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.Date;
 
-import javax.persistence.*;
-import java.time.LocalDate;
-
-@Entity
-@Table(name = "reservation")
 public class Reservation {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long reservationID;
-
-    @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
-
-    @Column(name = "end_date", nullable = false)
-    private LocalDate endDate;
-
-    @Column(name = "room_number", nullable = false)
-    private int roomNumber;
-
-    @Column(name = "archive_number")
-    private int archiveNumber;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "client_id", nullable = false)
-    @JsonIgnore
+    private int numeroReservation;
+    private Date dateDebut;
+    private Date dateFin;
     private Clients client;
+    private Room chambre;
 
-    public Reservation() {
-    }
-
-    public Reservation(LocalDate startDate, LocalDate endDate, int roomNumber, Clients client) {
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.roomNumber = roomNumber;
+    public Reservation(int numeroReservation, Date dateDebut, Date dateFin, Clients client, Room chambre) {
+        this.numeroReservation = numeroReservation;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
         this.client = client;
+        this.chambre = chambre;
     }
 
-    public Long getReservationID() {
-        return reservationID;
+    public int getNumeroReservation() {
+        return numeroReservation;
     }
 
-    public void setReservationID(Long reservationID) {
-        this.reservationID = reservationID;
+    public void setNumeroReservation(int numeroReservation) {
+        this.numeroReservation = numeroReservation;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public Date getDateDebut() {
+        return dateDebut;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public void setDateDebut(Date dateDebut) {
+        this.dateDebut = dateDebut;
     }
 
-    public LocalDate getEndDate() {
-        return endDate;
+    public Date getDateFin() {
+        return dateFin;
     }
 
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
-    }
-
-    public int getRoomNumber() {
-        return roomNumber;
-    }
-
-    public void setRoomNumber(int roomNumber) {
-        this.roomNumber = roomNumber;
-    }
-
-    public int getArchiveNumber() {
-        return archiveNumber;
-    }
-
-    public void setArchiveNumber(int archiveNumber) {
-        this.archiveNumber = archiveNumber;
+    public void setDateFin(Date dateFin) {
+        this.dateFin = dateFin;
     }
 
     public Clients getClient() {
@@ -87,15 +49,11 @@ public class Reservation {
         this.client = client;
     }
 
-    @Override
-    public String toString() {
-        return "Reservation{" +
-                "reservationID=" + reservationID +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", roomNumber=" + roomNumber +
-                ", archiveNumber=" + archiveNumber +
-                ", client=" + client +
-                '}';
+    public Room getChambre() {
+        return chambre;
+    }
+
+    public void setChambre(Room chambre) {
+        this.chambre = chambre;
     }
 }
