@@ -18,7 +18,7 @@ public interface ArchivesRepository extends CrudRepository<Archives, Integer> {
 
 
     @Query(value = Queries.findAllArchivesByNumber, nativeQuery = true)
-    Archives findByNumber(@Param("noArchive") long numberOfArchives);
+    Archives findByNumber(@Param("noArchive") int numberOfArchives);
 
 
     @Query(value = Queries.findAllArchivesByID, nativeQuery = true)

@@ -5,7 +5,7 @@ import java.util.List;
 
 public interface IArchivesService {
 
-    Archives findByNumber(long numberOfArchives);
+    Archives findByNumber(int numberOfArchives);
 
     List<Archives> findByID(int ID);
 

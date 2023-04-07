@@ -31,11 +31,11 @@ public class Room {
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
-    public Long getId() {
-        return Long.valueOf(id);
+    public int getId() {
+        return int.valueOf(id);
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = Math.toIntExact(id);
     }
 

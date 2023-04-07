@@ -3,13 +3,14 @@ package com.example.myhotel.controller;
 import com.example.myhotel.model.Hotel;
 import com.example.myhotel.service.implementation.HotelService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/hotels")
+@RequestMapping("/hotel")
 public class HotelController {
 
     @Autowired
@@ -21,24 +22,29 @@ public class HotelController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Hotel> getHotelById(@PathVariable Long id) {
-        return ResponseEntity.ok(hotelService.getHotelById(id));
+    public ResponseEntity<Hotel> getHotelById(@PathVariable int id) {
+        return hotelService.getHotelById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
     public ResponseEntity<Hotel> createHotel(@RequestBody Hotel hotel) {
-        return ResponseEntity.ok(hotelService.createHotel(hotel));
+        return ResponseEntity.status(HttpStatus.CREATED).body(hotelService.createHotel(hotel));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Hotel> updateHotel(@PathVariable Long id, @RequestBody Hotel hotel) {
-        return ResponseEntity.ok(hotelService.updateHotel(id,
-                hotel));
+    public ResponseEntity<Hotel> updateHotel(@PathVariable int id, @RequestBody Hotel hotel) {
+        return hotelService.saveOrUpdateHotel(id, hotel)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteHotel(@PathVariable Long id) {
-        hotelService.deleteHotel(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<Void> deleteHotel(@PathVariable int id) {
+        if (hotelService.deleteHotel(id)) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

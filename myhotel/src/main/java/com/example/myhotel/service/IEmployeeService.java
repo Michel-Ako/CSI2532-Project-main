@@ -8,14 +8,14 @@ import java.util.List;
 
 public interface IEmployeeService {
 
-    Employee findById(Long ID);
+    Employee findById(int ID);
 
     List<Employee> findByName(String name);
 
     Employee findBySSN(int SSN);
-    List<Employee> findByHotelID(long hotelID);
+    List<Employee> findByHotelID(int hotelID);
 
-    void changePost(Long ID, String post);
+    void changePost(int ID, String post);
 
     Employee save(Employee employee);
 

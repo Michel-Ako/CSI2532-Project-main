@@ -63,7 +63,7 @@ public class ArchivesController {
         if (idOrNumber.matches("\\d+")) {
             archive = archiveService.findByNumber(Integer.parseInt(idOrNumber));
         } else if (idOrNumber.matches("\\d+")) {
-            archive = archiveService.findByNumber(Long.parseLong(idOrNumber));
+            archive = archiveService.findByNumber(int.parseint(idOrNumber));
         }
         if (archive == null) {
             return ResponseEntity.notFound().build();

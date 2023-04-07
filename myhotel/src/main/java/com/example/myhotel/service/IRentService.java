@@ -7,7 +7,7 @@ import java.util.List;
 public interface IRentService {
     List<Rent> findAll();
 
-    Rent findByNumber(Long ID);
+    Rent findByNumber(int ID);
 
     List<Rent> findByDate(LocalDate Date);
 
@@ -15,13 +15,13 @@ public interface IRentService {
 
     List<Rent> findByEndDate(LocalDate EndDate);
 
-    List<Rent> findByClientID(long clientID);
+    List<Rent> findByClientID(int clientID);
 
-    void changeDate(Long ID, LocalDate Date);
+    void changeDate(int ID, LocalDate Date);
 
-    void changeStartDate(Long ID, LocalDate StartDate);
+    void changeStartDate(int ID, LocalDate StartDate);
 
-    void changeEndDate(Long ID,LocalDate EndDate);
+    void changeEndDate(int ID,LocalDate EndDate);
 
     Rent save(Rent rent);
 

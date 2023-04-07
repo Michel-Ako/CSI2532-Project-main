@@ -30,7 +30,7 @@ public class ReservationController {
     public ResponseEntity<String> makeReservation(
             @RequestParam("startDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate startDate,
             @RequestParam("endDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate endDate,
-            @RequestParam("customerID") Long customerID, @RequestParam("roomNumber") int roomNumber) {
+            @RequestParam("customerID") int customerID, @RequestParam("roomNumber") int roomNumber) {
 
         List<Reservation> reservations = new ArrayList<>();
         List<Reservation> startReservations = reservationService.findByStartDate(startDate);
@@ -51,7 +51,7 @@ public class ReservationController {
 
     @PostMapping("/cancelReservation")
     public ResponseEntity<String> cancelReservation(
-            @RequestParam("reservationID") Long reservationID ) {
+            @RequestParam("reservationID") int reservationID ) {
 
         Reservation reservation = reservationService.findByID(reservationID);
         if (reservation != null) {
@@ -64,7 +64,7 @@ public class ReservationController {
 
     @PostMapping("/reserveRoom")
     public ResponseEntity<String> reserveRoom(
-            @RequestParam("reservationID") Long reservationID, @RequestParam("roomNumber") int roomNumber) {
+            @RequestParam("reservationID") int reservationID, @RequestParam("roomNumber") int roomNumber) {
 
         Reservation reservation = reservationService.findByID(reservationID);
         if (reservation != null) {
@@ -83,7 +83,7 @@ public class ReservationController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
+    public ResponseEntity<Reservation> getReservationById(@PathVariable int id) {
         Reservation reservation = reservationService.findByID(id);
         if (reservation == null) {
             return ResponseEntity.notFound().build();
@@ -92,7 +92,7 @@ public class ReservationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateReservation(@PathVariable Long id, @RequestBody Reservation updatedReservation) {
+    public ResponseEntity<?> updateReservation(@PathVariable int id, @RequestBody Reservation updatedReservation) {
         Reservation reservation = reservationService.findByID(id);
         if (reservation == null) {
             return ResponseEntity.notFound().build();

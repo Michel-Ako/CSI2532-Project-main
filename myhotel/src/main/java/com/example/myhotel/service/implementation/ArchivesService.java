@@ -19,7 +19,7 @@ public class ArchivesService implements IArchivesService {
         this.archivesRepository = archivesRepository;
     }
 
-    public Archives findByNumber(long numberOfArchives) {
+    public Archives findByNumber(int numberOfArchives) {
         return archivesRepository.findByNumber(numberOfArchives);
     }
 

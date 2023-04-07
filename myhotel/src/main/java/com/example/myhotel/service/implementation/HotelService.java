@@ -2,41 +2,35 @@ package com.example.myhotel.service.implementation;
 
 import com.example.myhotel.model.Hotel;
 import com.example.myhotel.repository.HotelRepository;
+import com.example.myhotel.service.IHotelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class HotelService {
+public class HotelService implements IHotelService {
 
     @Autowired
     private HotelRepository hotelRepository;
 
+    @Override
     public List<Hotel> getAllHotels() {
         return hotelRepository.findAll();
     }
 
-    public Hotel getHotelById(Long id) {
-        return hotelRepository.findById(Math.toIntExact(id)).orElse(null);
+    @Override
+    public Hotel getHotelById(Integer id) {
+        return hotelRepository.findById(id).orElse(null);
     }
 
-    public Hotel createHotel(Hotel hotel) {
+    @Override
+    public Hotel saveOrUpdateHotel(Hotel hotel) {
         return hotelRepository.save(hotel);
     }
 
-    public Hotel updateHotel(Long id, Hotel hotelDetails) {
-        Hotel hotel = getHotelById(id);
-        if (hotel != null) {
-            hotel.setName(hotelDetails.getName());
-            hotel.setAddress(hotelDetails.getAddress());
-            hotel.setPhoneNumber(hotelDetails.getPhoneNumber());
-            return hotelRepository.save(hotel);
-        }
-        return null;
-    }
-
-    public void deleteHotel(Long id) {
-        hotelRepository.deleteById(Math.toIntExact(id));
+    @Override
+    public void deleteHotel(Integer id) {
+        hotelRepository.deleteById(id);
     }
 }

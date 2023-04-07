@@ -13,10 +13,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReservationRepository extends CrudRepository<Reservation, Long> {
+public interface ReservationRepository extends CrudRepository<Reservation, int> {
 
     @Query(value = Queries.findAllReservationsByID, nativeQuery = true)
-    Optional<Reservation> findByID(@Param("reservation_ID") Long reservation_ID);
+    Optional<Reservation> findByID(@Param("reservation_ID") int reservation_ID);
 
 
     @Query(value = Queries.findAllReservationsByDate, nativeQuery = true)
@@ -32,7 +32,7 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
 
 
     @Query(value = Queries.findAllReservationsByCustomerID, nativeQuery = true)
-    List<Reservation> findByCustomerID(@Param("client_ID") Long client_ID);
+    List<Reservation> findByCustomerID(@Param("client_ID") int client_ID);
 
 
     @Query(value = Queries.findAllReservationsByArchiveNumber, nativeQuery = true)
@@ -48,15 +48,15 @@ public interface ReservationRepository extends CrudRepository<Reservation, Long>
 
     @Modifying
     @Query(value = Queries.changeReservationDate, nativeQuery = true)
-    void changeDate(@Param("reservation_ID") Long reservation_ID, @Param("reservationdate") LocalDate reservationdate);
+    void changeDate(@Param("reservation_ID") int reservation_ID, @Param("reservationdate") LocalDate reservationdate);
 
     @Modifying
     @Query(value = Queries.changeReservationStartDate, nativeQuery = true)
-    void changeStartDate(@Param("reservation_ID") Long reservation_ID, @Param("startdate") LocalDate startdate);
+    void changeStartDate(@Param("reservation_ID") int reservation_ID, @Param("startdate") LocalDate startdate);
 
     @Modifying
     @Query(value = Queries.changeReservationEndDate, nativeQuery = true)
-    void changeEndDate(@Param("reservation_ID") Long reservation_ID, @Param("enddate") LocalDate enddate);
+    void changeEndDate(@Param("reservation_ID") int reservation_ID, @Param("enddate") LocalDate enddate);
 
     @Modifying
     @Query(value = Queries.changePost, nativeQuery = true)

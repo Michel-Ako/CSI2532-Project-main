@@ -18,7 +18,7 @@ public class RentService {
         return rentRepository.findAll();
     }
 
-    public Optional<Rent> getRentById(Long id) {
+    public Optional<Rent> getRentById(int id) {
         return rentRepository.findById(id);
     }
 
@@ -26,7 +26,7 @@ public class RentService {
         return rentRepository.save(rent);
     }
 
-    public Rent updateRent(Long id, Rent rentDetails) {
+    public Rent updateRent(int id, Rent rentDetails) {
         Optional<Rent> optionalRent = rentRepository.findById(id);
         if (optionalRent.isPresent()) {
             Rent rent = optionalRent.get();
@@ -41,7 +41,7 @@ public class RentService {
         return null;
     }
 
-    public void deleteRent(Long id) {
+    public void deleteRent(int id) {
         rentRepository.deleteById(id);
     }
 

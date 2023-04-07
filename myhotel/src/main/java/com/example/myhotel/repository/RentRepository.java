@@ -14,15 +14,15 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface RentRepository extends JpaRepository<Rent, Long> {
+public interface RentRepository extends JpaRepository<Rent, Integer> {
 
-    Optional<Rent> findByRentId(Long rentId);
+    Optional<Rent> findByRentId(int rentId);
 
     List<Rent> findByRentDate(LocalDate rentDate);
 
     Rent findByRoomNumber(int roomNumber);
 
-    List<Rent> findByClientId(long clientId);
+    List<Rent> findByClientId(int clientId);
 
     List<Rent> findByStartDate(LocalDate startDate);
 
@@ -30,15 +30,15 @@ public interface RentRepository extends JpaRepository<Rent, Long> {
 
     @Modifying
     @Query(value = Queries.changeDate, nativeQuery = true)
-    void changeDate(@Param("rentId") Long rentId, @Param("rentDate") LocalDate rentDate);
+    void changeDate(@Param("rentId") int rentId, @Param("rentDate") LocalDate rentDate);
 
     @Modifying
     @Query(value = Queries.changeStartDate, nativeQuery = true)
-    void changeStartDate(@Param("rentId") Long rentId, @Param("startDate") LocalDate startDate);
+    void changeStartDate(@Param("rentId") int rentId, @Param("startDate") LocalDate startDate);
 
     @Modifying
     @Query(value = Queries.changeEndDate, nativeQuery = true)
-    void changeEndDate(@Param("rentId") Long rentId, @Param("endDate") LocalDate endDate);
+    void changeEndDate(@Param("rentId") int rentId, @Param("endDate") LocalDate endDate);
 
     @Override
     Rent save(Rent rent);

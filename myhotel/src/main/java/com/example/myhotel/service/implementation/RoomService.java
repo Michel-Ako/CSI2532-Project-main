@@ -2,49 +2,35 @@ package com.example.myhotel.service.implementation;
 
 import com.example.myhotel.model.Room;
 import com.example.myhotel.repository.RoomRepository;
+import com.example.myhotel.service.IRoomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class RoomService {
+public class RoomService implements IRoomService {
+
     @Autowired
-    private RoomRepository roomRepository;
+    private RoomRepository chambreRepository;
 
-    public List<Room> getAllRooms() {
-        return roomRepository.findAll();
+    @Override
+    public List<Room> getAllChambres() {
+        return chambreRepository.findAll();
     }
 
-    public Room getRoomById(int id) {
-        return roomRepository.findById(id).orElse(null);
+    @Override
+    public Room getChambreById(Integer id) {
+        return chambreRepository.findById(id).orElse(null);
     }
 
-    public Room createRoom(Room room) {
-        return roomRepository.save(room);
+    @Override
+    public Room saveOrUpdateChambre(Room chambre) {
+        return chambreRepository.save(chambre);
     }
 
-    public Room updateRoom(int id, Room roomDetails) {
-        Room room = getRoomById(id);
-        if (room != null) {
-            room.setRoomType(roomDetails.getRoomType());
-            room.setPrice(roomDetails.getPrice());
-            room.setCapacity(roomDetails.getCapacity());
-            room.setView(roomDetails.getView());
-            room.setExtent(roomDetails.isExtent());
-            room.setDamage(roomDetails.getDamage());
-            room.setAmenities(roomDetails.getAmenities());
-            room.setAvailability(roomDetails.isAvailability());
-            room.setStatus(roomDetails.getStatus());
-            room.setHotel(roomDetails.getHotel());
-            room.setClient(roomDetails.getClient());
-            room.setEmployee(roomDetails.getEmployee());
-            return roomRepository.save(room);
-        }
-        return null;
-    }
-
-    public void deleteRoom(int id) {
-        roomRepository.deleteById(id);
+    @Override
+    public void deleteChambre(Integer id) {
+        chambreRepository.deleteById(id);
     }
 }

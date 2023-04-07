@@ -2,47 +2,35 @@ package com.example.myhotel.service.implementation;
 
 import com.example.myhotel.model.Clients;
 import com.example.myhotel.repository.ClientsRepository;
+import com.example.myhotel.service.IClientsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
-public class ClientsService {
+public class ClientsService implements IClientsService {
 
     @Autowired
-    private ClientsRepository clientsRepository;
+    private ClientsRepository clientRepository;
 
-    public Clients findById(Long id) {
-        return clientsRepository.findById(Math.toIntExact(id)).orElse(null);
-    }
-
+    @Override
     public List<Clients> getAllClients() {
-        return clientsRepository.findAll();
+        return clientRepository.findAll();
     }
 
-    public Optional<Clients> getClientById(Integer id) {
-        return clientsRepository.findById(id);
+    @Override
+    public Clients getClientById(Integer id) {
+        return clientRepository.findById(id).orElse(null);
     }
 
-    public Clients createClient(Clients client) {
-        return clientsRepository.save(client);
+    @Override
+    public Clients saveOrUpdateClient(Clients client) {
+        return clientRepository.save(client);
     }
 
-    public Clients updateClient(Long id, Clients clientDetails) {
-        Clients client = getClientById(Math.toIntExact(id)).orElse(null);
-        if (client != null) {
-            client.setFirstName(clientDetails.getFirstName());
-            client.setLastName(clientDetails.getLastName());
-            client.setPhoneNumber(clientDetails.getPhoneNumber());
-            client.setEmail(clientDetails.getEmail());
-            return clientsRepository.save(client);
-        }
-        return null;
-    }
-
-    public void deleteClient(Long id) {
-        clientsRepository.deleteById(Math.toIntExact(id));
+    @Override
+    public void deleteClient(Integer id) {
+        clientRepository.deleteById(id);
     }
 }

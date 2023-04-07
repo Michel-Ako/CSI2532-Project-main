@@ -23,7 +23,7 @@ public class RentController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Rent> getRentById(@PathVariable Long id) {
+    public ResponseEntity<Rent> getRentById(@PathVariable int id) {
         Optional<Rent> rent = rentService.getRentById(id);
         if (rent.isPresent()) {
             return new ResponseEntity<>(rent.get(), HttpStatus.OK);
@@ -37,7 +37,7 @@ public class RentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Rent> updateRent(@PathVariable Long id, @RequestBody Rent rentDetails) {
+    public ResponseEntity<Rent> updateRent(@PathVariable int id, @RequestBody Rent rentDetails) {
         Rent updatedRent = rentService.updateRent(id, rentDetails);
         if (updatedRent != null) {
             return new ResponseEntity<>(updatedRent, HttpStatus.OK);
@@ -46,7 +46,7 @@ public class RentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRent(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRent(@PathVariable int id) {
         rentService.deleteRent(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

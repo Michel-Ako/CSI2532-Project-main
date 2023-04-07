@@ -17,7 +17,7 @@ public class EmployeeService {
         return employeeRepository.findAll();
     }
 
-    public Employee getEmployeeById(Long id) {
+    public Employee getEmployeeById(int id) {
         return employeeRepository.findById(Math.toIntExact(id)).orElse(null);
     }
 
@@ -25,7 +25,7 @@ public class EmployeeService {
         return employeeRepository.save(employee);
     }
 
-    public Employee updateEmployee(Long id, Employee employeeDetails) {
+    public Employee updateEmployee(int id, Employee employeeDetails) {
         Employee employee = getEmployeeById(id);
         if (employee != null) {
             employee.setFirstName(employeeDetails.getFirstName());
@@ -37,7 +37,7 @@ public class EmployeeService {
         return null;
     }
 
-    public void deleteEmployee(Long id) {
+    public void deleteEmployee(int id) {
         employeeRepository.deleteById(Math.toIntExact(id));
     }
 }

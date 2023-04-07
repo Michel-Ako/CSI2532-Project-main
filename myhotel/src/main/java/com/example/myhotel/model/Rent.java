@@ -20,7 +20,7 @@ public class Rent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rent_ID", nullable = false)
-    private Long id;
+    private int id;
 
     @Column(name = "rentdate", nullable = false)
     private LocalDate rentdate;
@@ -56,11 +56,11 @@ public class Rent {
         this.noArchives = noArchives;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
