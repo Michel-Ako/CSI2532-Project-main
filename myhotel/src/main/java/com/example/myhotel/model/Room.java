@@ -1,6 +1,7 @@
 package com.example.myhotel.model;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "chambre")
