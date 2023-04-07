@@ -13,7 +13,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ReservationRepository extends CrudRepository<Reservation, int> {
+public interface ReservationRepository extends CrudRepository<Reservation, Integer> {
 
     @Query(value = Queries.findAllReservationsByID, nativeQuery = true)
     Optional<Reservation> findByID(@Param("reservation_ID") int reservation_ID);
@@ -36,7 +36,7 @@ public interface ReservationRepository extends CrudRepository<Reservation, int> 
 
 
     @Query(value = Queries.findAllReservationsByArchiveNumber, nativeQuery = true)
-    List<Reservation> findByArchiveNumber(@Param("noArchive") int noArchive);
+    List<Reservation> findByArchiveNumber(@Param("numero_archive") int numero_archive);
 
     @Query(value = "SELECT *\n" +
             "FROM Reservation r1, Reservation r2\n" +

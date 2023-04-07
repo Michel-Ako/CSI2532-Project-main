@@ -18,7 +18,7 @@ public interface ArchivesRepository extends CrudRepository<Archives, Integer> {
 
 
     @Query(value = Queries.findAllArchivesByNumber, nativeQuery = true)
-    Archives findByNumber(@Param("noArchive") int numberOfArchives);
+    Archives findByNumber(@Param("numero_archive") int numberOfArchives);
 
 
     @Query(value = Queries.findAllArchivesByID, nativeQuery = true)
@@ -26,12 +26,12 @@ public interface ArchivesRepository extends CrudRepository<Archives, Integer> {
 
     @Modifying
     @Query(value = Queries.changeArchivesType, nativeQuery = true)
-    void changeArchivesType(@Param("noArchive") int numberOfArchives, @Param("type") String type);
+    void changeArchivesType(@Param("numero_archive") int numberOfArchives, @Param("type") String type);
 
     @Modifying
     @Transactional
-    @Query("UPDATE Archives SET archives_ID = :ID WHERE noArchive = :noArchive")
-    void changeArchivesID(@Param("ID") int newArchivesID, @Param("noArchive") int archiveNo);
+    @Query("UPDATE Archives SET archives_ID = :ID WHERE numero_archive = :numero_archive")
+    void changeArchivesID(@Param("ID") int newArchivesID, @Param("numero_archive") int archiveNo);
 
 
 

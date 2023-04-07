@@ -1,5 +1,7 @@
 package com.example.myhotel.model;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "archive")
@@ -7,55 +9,47 @@ public class Archives {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "noArchive", nullable = false)
-    private int noArchive;
+    @Column(name = "numero_archive")
+    private int numeroArchive;
 
-    @Column(name = "type", nullable = false)
-    private String type;
+    @Column(name = "type_archive")
+    private String typeArchive;
 
-    @Column(name = "archives_ID", nullable = false)
-    private int archives_ID;
+    @Column(name = "id_archive", unique = true)
+    private int idArchive;
 
-    public Archives() {
+    @OneToMany(mappedBy = "archive", cascade = CascadeType.ALL)
+    private List<Location> locations;
+
+    public int getNumeroArchive() {
+        return numeroArchive;
     }
 
-    public Archives(int noArchive, String type, int ID) {
-        this.noArchive = noArchive;
-        this.type = type;
-        this.archives_ID = ID;
+    public void setNumeroArchive(int numeroArchive) {
+        this.numeroArchive = numeroArchive;
     }
 
-    public int getNoArchive() {
-        return noArchive;
+    public String getTypeArchive() {
+        return typeArchive;
     }
 
-    public void setNoArchive(int noArchive) {
-        this.noArchive = noArchive;
+    public void setTypeArchive(String typeArchive) {
+        this.typeArchive = typeArchive;
     }
 
-    public String getType() {
-        return type;
+    public int getIdArchive() {
+        return idArchive;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setIdArchive(int idArchive) {
+        this.idArchive = idArchive;
     }
 
-    public int getID() {
-        return archives_ID;
+    public List<Location> getLocations() {
+        return locations;
     }
 
-    public void setID(int ID) {
-        this.archives_ID = ID;
-    }
-
-    @Override
-    public String toString() {
-        return "Archives{" +
-                "noArchive='" + noArchive + '\'' +
-                ", type='" + type + '\'' +
-                ", ID='" + archives_ID + '\'' +
-                '}';
+    public void setLocations(List<Location> locations) {
+        this.locations = locations;
     }
 }
-

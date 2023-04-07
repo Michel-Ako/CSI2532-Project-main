@@ -6,54 +6,46 @@ import com.example.myhotel.service.IArchivesService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ArchivesService implements IArchivesService {
 
-    private final ArchivesRepository archivesRepository;
-
     @Autowired
-    public ArchivesService(ArchivesRepository archivesRepository) {
-        this.archivesRepository = archivesRepository;
-    }
+    private ArchivesRepository archiveRepository;
 
-    public Archives findByNumber(int numberOfArchives) {
-        return archivesRepository.findByNumber(numberOfArchives);
+    @Override
+    public List<Archives> getAllArchives() {
+        return (List<Archives>) archiveRepository.findAll();
     }
 
     @Override
-    public List<Archives> findByID(int ID) {
-        return archivesRepository.findByID(ID);
+    public Archives getArchiveById(int id) {
+        Optional<Archives> optionalArchive = archiveRepository.findById(id);
+        return optionalArchive.orElse(null);
     }
 
     @Override
-    public void changeArchivesType(int numberOfArchives, String type) {
-        Archives archives = archivesRepository.findByNumber(numberOfArchives);
-        archives.setType(type);
-        archivesRepository.save(archives);
+    public Archives createArchive(Archives archive) {
+        return archiveRepository.save(archive);
     }
 
     @Override
-    public void changeArchivesID(int numberOfArchives, int archiveID) {
-        Archives archives = archivesRepository.findByNumber(numberOfArchives);
-        archives.setID(archiveID);
-        archivesRepository.save(archives);
+    public Archives updateArchive(int id, Archives archive) {
+        Optional<Archives> optionalArchive = archiveRepository.findById(id);
+        if (optionalArchive.isPresent()) {
+            Archives existingArchive = optionalArchive.get();
+            existingArchive.setTypeArchive(archive.getTypeArchive());
+            existingArchive.setIdArchive(archive.getIdArchive());
+            return archiveRepository.save(existingArchive);
+        } else {
+            return null;
+        }
     }
 
     @Override
-    public void save(Archives archive) {
-        archivesRepository.save(archive);
-    }
-
-    public List<Archives> findAll() {
-        Iterable<Archives> archivesIterable = archivesRepository.findAll();
-        return archivesIterable != null ? (List<Archives>) archivesIterable : new ArrayList<>();
-    }
-
-    @Override
-    public void delete(Archives archive) {
-        archivesRepository.delete(archive);
+    public void deleteArchive(int id) {
+        archiveRepository.deleteById(id);
     }
 }

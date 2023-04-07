@@ -1,13 +1,13 @@
 package com.example.myhotel.utils;
 
 public class Queries{
-    public static final String findAllArchivesByNumber = "SELECT * FROM db.Archive WHERE noArchive = :noArchive ";
+    public static final String findAllArchivesByNumber = "SELECT * FROM db.Archive WHERE numero_archive = :numero_archive ";
 
     public static final String findAllArchivesByID = "SELECT * FROM db.Archive WHERE archives_ID = :archives_ID ";
 
-    public static final String changeArchivesID = "UPDATE db.Archives SET archives_ID = :ID WHERE archiveNo = :noArchive";
+    public static final String changeArchivesID = "UPDATE db.Archives SET archives_ID = :ID WHERE archiveNo = :numero_archive";
 
-    public static final String changeArchivesType = "UPDATE db.Archives SET type = :type WHERE noArchive = :noArchive";
+    public static final String changeArchivesType = "UPDATE db.Archives SET type = :type WHERE numero_archive = :numero_archive";
 
     public static final String findAllChainsByName = "SELECT * FROM db.Chain WHERE name = :chain_name ";
 
@@ -65,7 +65,7 @@ public class Queries{
 
     public static final String findAllReservationsByCustomerID = "SELECT * FROM db.Reservations WHERE client_ID = :client_ID";
 
-    public static final String findAllReservationsByArchiveNumber = "SELECT * FROM db.Reservations natural join db.Archives WHERE noArchive = :noArchive";
+    public static final String findAllReservationsByArchiveNumber = "SELECT * FROM db.Reservations natural join db.Archives WHERE numero_archive = :numero_archive";
 
     public static final String changeReservationDate = "UPDATE db.Reservations SET reservationdate = :reservationdate WHERE reservation_ID = :reservation_ID ";
 

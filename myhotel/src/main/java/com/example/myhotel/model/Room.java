@@ -32,11 +32,11 @@ public class Room {
     private Hotel hotel;
 
     public int getId() {
-        return int.valueOf(id);
+        return id;
     }
 
     public void setId(int id) {
-        this.id = Math.toIntExact(id);
+        this.id = id;
     }
 
     public int getNumeroChambre() {

@@ -2,42 +2,47 @@ package com.example.myhotel.service.implementation;
 
 import com.example.myhotel.model.Employee;
 import com.example.myhotel.repository.EmployeeRepository;
+import com.example.myhotel.service.IEmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class EmployeeService {
-
+public class EmployeeService implements IEmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
+    @Override
     public List<Employee> getAllEmployees() {
         return employeeRepository.findAll();
     }
 
+    @Override
     public Employee getEmployeeById(int id) {
-        return employeeRepository.findById(Math.toIntExact(id)).orElse(null);
+        return employeeRepository.findById(id).orElse(null);
     }
 
+    @Override
     public Employee createEmployee(Employee employee) {
         return employeeRepository.save(employee);
     }
 
-    public Employee updateEmployee(int id, Employee employeeDetails) {
-        Employee employee = getEmployeeById(id);
-        if (employee != null) {
-            employee.setFirstName(employeeDetails.getFirstName());
-            employee.setLastName(employeeDetails.getLastName());
-            employee.setPhone(employeeDetails.getPhone());
-            employee.setEmail(employeeDetails.getEmail());
-            return employeeRepository.save(employee);
+    @Override
+    public Employee updateEmployee(int id, Employee employee) {
+        Employee existingEmployee = getEmployeeById(id);
+        if (existingEmployee != null) {
+            existingEmployee.setNom_complet(employee.getNom_complet());
+            existingEmployee.setAdresse(employee.getAdresse());
+            existingEmployee.setNas(employee.getNas());
+            existingEmployee.setPoste(employee.getPoste());
+            return employeeRepository.save(existingEmployee);
         }
         return null;
     }
 
+    @Override
     public void deleteEmployee(int id) {
-        employeeRepository.deleteById(Math.toIntExact(id));
+        employeeRepository.deleteById(id);
     }
 }

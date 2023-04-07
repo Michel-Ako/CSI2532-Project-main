@@ -1,14 +1,16 @@
 package com.example.myhotel.model;
 
 import javax.persistence.*;
+import javax.persistence.FetchType;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "reservation")
-public class Reservation {
+@Table(name = "location")
+public class Location {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_reservation")
+    @Column(name = "id_location")
     private int id;
 
     @Column(name = "date_reservation")
@@ -23,8 +25,8 @@ public class Reservation {
     @Column(name = "numero_chambre")
     private int numeroChambre;
 
-    @ManyToOne
-    @JoinColumn(name = "numero_archive")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "numero_archive", referencedColumnName = "numero_archive")
     private Archives archive;
 
     public int getId() {
