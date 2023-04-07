@@ -7,7 +7,7 @@ import javax.persistence.*;
 public class Room {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "numero_chambre")
     private int numeroChambre;
@@ -21,20 +21,22 @@ public class Room {
     @Column(name = "disponibilite")
     private boolean disponibilite;
 
+    // ManyToOne relationship with Client
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Clients client;
 
+    // ManyToOne relationship with Hotel
     @ManyToOne
     @JoinColumn(name = "hotel_id")
     private Hotel hotel;
 
     public Long getId() {
-        return id;
+        return Long.valueOf(id);
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.id = Math.toIntExact(id);
     }
 
     public int getNumeroChambre() {
