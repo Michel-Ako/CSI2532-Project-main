@@ -14,11 +14,35 @@ public class Room {
     @Column(name = "type_chambre")
     private String typeChambre;
 
-    @Column(name = "prix_par_nuit")
+    @Column(name = "prix")
     private double prixParNuit;
 
     @Column(name = "disponibilite")
     private boolean disponibilite;
+
+    @Column(name = "vue")
+    private String vue;
+
+    @Column(name = "capacite")
+    private String capacite;
+
+
+    public String getVue() {
+        return vue;
+    }
+
+    public void setVue(String vue) {
+        this.vue = vue;
+    }
+
+    public String getCapacite() {
+        return capacite;
+    }
+
+    public void setCapacite(String capacite) {
+        this.capacite = capacite;
+    }
+
 
     // ManyToOne relationship with Client
     @ManyToOne
