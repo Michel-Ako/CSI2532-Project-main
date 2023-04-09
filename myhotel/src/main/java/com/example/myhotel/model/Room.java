@@ -26,6 +26,16 @@ public class Room {
     @Column(name = "capacite")
     private String capacite;
 
+    @Column(name = "id_hotel")
+    private String id_hotel;
+
+    public String getId_hotel() {
+        return id_hotel;
+    }
+
+    public void setId_hotel(String id_hotel) {
+        this.id_hotel = id_hotel;
+    }
 
     public String getVue() {
         return vue;

@@ -20,7 +20,7 @@ public class ChainController {
     }
 
     @GetMapping("/{id}")
-    public Chain getChaineHoteliereById(@PathVariable Integer id) {
+    public Chain getChaineHoteliereById(@PathVariable String id) {
         return chaineHoteliereService.getChaineHoteliereById(id);
     }
 

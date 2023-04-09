@@ -20,8 +20,8 @@ public class ChainService implements IChainService {
     }
 
     @Override
-    public Chain getChaineHoteliereById(Integer id) {
-        return chaineHoteliereRepository.findById(String.valueOf(id)).orElse(null);
+    public Chain getChaineHoteliereById(String nomChaine) {
+        return chaineHoteliereRepository.findById(nomChaine).orElse(null);
     }
 
     @Override

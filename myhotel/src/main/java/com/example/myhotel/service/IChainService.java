@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface IChainService {
     List<Chain> getAllChaineHotelieres();
-    Chain getChaineHoteliereById(Integer id);
+    Chain getChaineHoteliereById(String id);
     Chain saveOrUpdateChaineHoteliere(Chain chaineHoteliere);
     void deleteChaineHoteliere(Integer id);
 }
