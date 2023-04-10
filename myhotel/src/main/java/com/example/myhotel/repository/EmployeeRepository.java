@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-    Optional<Employee> findBynom_complet(String nom_complet);
+    Optional<Employee> findByNomComplet(String nomComplet);
 }

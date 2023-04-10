@@ -11,5 +11,5 @@ public interface IEmployeeService {
     Employee createEmployee(Employee employee);
     Employee updateEmployee(int id, Employee employee);
     void deleteEmployee(int id);
-    Optional<Employee> getEmployeeBynom_complet(String nom_complet);
+    Optional<Employee> getEmployeeBynomComplet(String nom_complet);
 }

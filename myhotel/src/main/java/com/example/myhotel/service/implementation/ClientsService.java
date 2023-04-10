@@ -36,8 +36,8 @@ public class ClientsService implements IClientsService {
     }
 
     @Override
-    public Optional<Clients> getClientBynom_complet(String nom_complet) {
-        return clientRepository.findBynom_complet(nom_complet);
+    public Optional<Clients> getClientBynomComplet(String nomComplet) {
+        return clientRepository.findByNomComplet(nomComplet);
     }
 }
 

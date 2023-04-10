@@ -19,8 +19,8 @@ public class ClientsController {
     private IClientsService clientService;;
 
     @GetMapping("/byNomComplet/{nomComplet}")
-    public ResponseEntity<Clients> getClientBynom_complet(@PathVariable String nomComplet) {
-        Optional<Clients> client = clientService.getClientBynom_complet(nomComplet);
+    public ResponseEntity<Clients> getClientBynomComplet(@PathVariable String nomComplet) {
+        Optional<Clients> client = clientService.getClientBynomComplet(nomComplet);
         return client.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }

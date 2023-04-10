@@ -15,7 +15,7 @@ public class Clients {
     private int clientId;
 
     @Column(name = "nom_complet")
-    private String nom_complet;
+    private String nomComplet;
 
     @Column(name = "adresse")
     private String adresse;
@@ -51,12 +51,12 @@ public class Clients {
         this.clientId = clientId;
     }
 
-    public String getnom_complet() {
-        return nom_complet;
+    public String getnomComplet() {
+        return nomComplet;
     }
 
-    public void setnom_complet(String nom_complet) {
-        this.nom_complet = nom_complet;
+    public void setnomComplet(String nomComplet) {
+        this.nomComplet = nomComplet;
     }
 
     public String getAdresse() {

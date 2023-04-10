@@ -22,8 +22,8 @@ public class EmployeeController {
     }
 
     @GetMapping("/byNomComplet/{nomComplet}")
-    public ResponseEntity<Employee> getEmployeeBynom_complet(@PathVariable String nomComplet) {
-        Optional<Employee> employee = employeeService.getEmployeeBynom_complet(nomComplet);
+    public ResponseEntity<Employee> getEmployeeBynomComplet(@PathVariable String nomComplet) {
+        Optional<Employee> employee = employeeService.getEmployeeBynomComplet(nomComplet);
         return employee.map(response -> ResponseEntity.ok().body(response))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
