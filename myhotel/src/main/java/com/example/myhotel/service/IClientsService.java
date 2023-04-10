@@ -10,6 +10,6 @@ public interface IClientsService {
     Clients getClientById(Integer id);
     Clients saveOrUpdateClient(Clients client);
     void deleteClient(Integer id);
-    Optional<Clients> getClientByNomComplet(String nomComplet);
+    Optional<Clients> getClientBynom_complet(String nom_complet);
 }
 

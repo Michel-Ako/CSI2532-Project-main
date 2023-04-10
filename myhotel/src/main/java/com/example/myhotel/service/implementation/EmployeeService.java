@@ -48,8 +48,8 @@ public class EmployeeService implements IEmployeeService {
     }
 
     @Override
-    public Optional<Employee> getEmployeeByNomComplet(String nomComplet) {
-        return employeeRepository.findByNomComplet(nomComplet);
+    public Optional<Employee> getEmployeeBynom_complet(String nom_complet) {
+        return employeeRepository.findBynom_complet(nom_complet);
     }
 
 }
