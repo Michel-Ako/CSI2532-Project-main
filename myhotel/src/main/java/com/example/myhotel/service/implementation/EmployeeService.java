@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EmployeeService implements IEmployeeService {
@@ -45,4 +46,10 @@ public class EmployeeService implements IEmployeeService {
     public void deleteEmployee(int id) {
         employeeRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<Employee> getEmployeeByNomComplet(String nomComplet) {
+        return employeeRepository.findByNomComplet(nomComplet);
+    }
+
 }

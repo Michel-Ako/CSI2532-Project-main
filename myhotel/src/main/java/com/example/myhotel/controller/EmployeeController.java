@@ -3,10 +3,12 @@ package com.example.myhotel.controller;
 import com.example.myhotel.model.Employee;
 import com.example.myhotel.service.implementation.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/employees")
@@ -19,6 +21,12 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
+    @GetMapping("/byNomComplet/{nomComplet}")
+    public ResponseEntity<Employee> getEmployeeByNomComplet(@PathVariable String nomComplet) {
+        Optional<Employee> employee = employeeService.getEmployeeByNomComplet(nomComplet);
+        return employee.map(response -> ResponseEntity.ok().body(response))
+                .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
+    }
     @GetMapping("/{id}")
     public ResponseEntity<Employee> getEmployeeById(@PathVariable int id) {
         Employee employee = employeeService.getEmployeeById(id);
@@ -28,7 +36,6 @@ public class EmployeeController {
             return ResponseEntity.notFound().build();
         }
     }
-
     @PostMapping
     public Employee createEmployee(@RequestBody Employee employee) {
         return employeeService.createEmployee(employee);
@@ -54,5 +61,7 @@ public class EmployeeController {
             return ResponseEntity.notFound().build();
         }
     }
+
+
 }
 

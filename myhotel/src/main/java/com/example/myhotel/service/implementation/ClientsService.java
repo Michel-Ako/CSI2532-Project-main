@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ClientsService implements IClientsService {
@@ -33,4 +34,10 @@ public class ClientsService implements IClientsService {
     public void deleteClient(Integer id) {
         clientRepository.deleteById(id);
     }
+
+    @Override
+    public Optional<Clients> getClientByNomComplet(String nomComplet) {
+        return clientRepository.findByNomComplet(nomComplet);
+    }
 }
+
