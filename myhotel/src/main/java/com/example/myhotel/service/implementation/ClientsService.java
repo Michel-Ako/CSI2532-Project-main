@@ -31,6 +31,12 @@ public class ClientsService implements IClientsService {
     }
 
     @Override
+    public void addClient(Clients client) {
+        clientRepository.save(client);
+    }
+
+
+    @Override
     public void deleteClient(Integer id) {
         clientRepository.deleteById(id);
     }

@@ -40,6 +40,12 @@ public class ClientsController {
         return clientService.saveOrUpdateClient(client);
     }
 
+    @PostMapping("/add")
+    public void addClient(@RequestBody Clients client) {
+        clientService.addClient(client);
+    }
+
+
     @DeleteMapping("/{id}")
     public void deleteClient(@PathVariable Integer id) {
         clientService.deleteClient(id);

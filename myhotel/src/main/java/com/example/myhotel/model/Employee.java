@@ -10,7 +10,7 @@ public class Employee {
     private int id_employe;
 
     @Column(name = "nom_complet")
-    private String nom_complet;
+    private String nomComplet;
 
     @Column(name = "adresse")
     private String adresse;
@@ -30,11 +30,11 @@ public class Employee {
     }
 
     public String getNom_complet() {
-        return nom_complet;
+        return nomComplet;
     }
 
-    public void setNom_complet(String nom_complet) {
-        this.nom_complet = nom_complet;
+    public void setNom_complet(String nomComplet) {
+        this.nomComplet = nomComplet;
     }
 
     public String getAdresse() {
