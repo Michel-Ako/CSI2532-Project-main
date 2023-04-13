@@ -1,8 +1,11 @@
 package com.example.myhotel.controller;
 
 import com.example.myhotel.model.Reservation;
+import com.example.myhotel.service.IReservationService;
 import com.example.myhotel.service.implementation.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,7 +15,7 @@ import java.util.List;
 public class ReservationController {
 
     @Autowired
-    private ReservationService reservationService;
+    private IReservationService reservationService;
 
     @GetMapping("/")
     public List<Reservation> getAllReservations() {

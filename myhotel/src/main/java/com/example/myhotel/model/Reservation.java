@@ -27,11 +27,11 @@ public class Reservation {
     @JoinColumn(name = "numero_archive")
     private Archives archive;
 
-    public int getId() {
+    public int getReservationId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setReservationId(int id) {
         this.id = id;
     }
 
@@ -66,7 +66,6 @@ public class Reservation {
     public void setNumeroChambre(int numeroChambre) {
         this.numeroChambre = numeroChambre;
     }
-
     public Archives getArchive() {
         return archive;
     }
